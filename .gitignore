@@ -1,0 +1,6 @@
+build/
+bin/
+*.out 
+*.o 
+compile_flags.txt 
+
