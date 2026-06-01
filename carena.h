@@ -20,22 +20,23 @@ extern  "C" {
 #endif
 
 
-#define KiB(size) ((size)    * 1024)	
-#define MiB(size) (KiB(size) * 1024)	
-#define GiB(size) (MiB(size) * 1024)
+#define KiB(num) ((num)    * 1024)	
+#define MiB(num) (KiB(num) * 1024)	
+#define GiB(num) (MiB(num) * 1024)
+#define ALIGNMENT 8
 
 typedef struct arena arena;
 
 struct arena{
-	void* memory; 
+	uint8_t* memory; 
 	size_t capacity; 
 	size_t offset;
 };
 
-arena* arena_init(size_t size);           //	allocates the block
-void arena_alloc(arena* a, size_t size);  //	bump pointer + alignment
-void arena_reset(arena* a);               //	rewind the offset to 0
-void arena_free(arena* a);                //	free the underlying memory 
+arena* arena_init(size_t capacity);           //	allocates the block
+void* arena_alloc(arena* a, size_t size);     //	bump pointer + alignment
+void arena_reset(arena* a);                   //	rewind the offset to 0
+void arena_free(arena* a);                    //	free the underlying memory 
 
 
 #ifdef __cplusplus
